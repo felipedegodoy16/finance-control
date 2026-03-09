@@ -1,0 +1,31 @@
+@import "tailwindcss";
+
+:root {
+  --background: #fdfcf0; /* Premium Light Creme */
+  --foreground: #1c3d18; /* Deep Green for better contrast */
+  --card: #ffffff;
+  --creme: #fdfcf0;
+  --green-dark: #20411a;
+  --green-mid: #3d6b35;
+  --green-light: #7da874;
+  --accent: #d4e3d1;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-vintage-creme: var(--creme);
+  --color-vintage-green_dark: var(--green-dark);
+  --color-vintage-green_mid: var(--green-mid);
+  --color-vintage-green_light: var(--green-light);
+  --color-vintage-accent: var(--accent);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
+  min-height: 100vh;
+}
