@@ -15,7 +15,7 @@ export default function LoginPage() {
     e.preventDefault();
     setError("");
     try {
-      const response = await api.post("/token/", { username, password });
+      const response = await api.post("token/", { username, password });
       localStorage.setItem("access_token", response.data.access);
       localStorage.setItem("refresh_token", response.data.refresh);
       // Set cookie for middleware

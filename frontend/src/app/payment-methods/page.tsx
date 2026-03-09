@@ -30,7 +30,7 @@ export default function PaymentMethodsPage() {
 
   const fetchMethods = async () => {
     try {
-      const response = await api.get("/payment-methods/");
+      const response = await api.get("payment-methods/");
       setMethods(response.data);
     } catch (err) {
       console.error(err);
@@ -59,12 +59,12 @@ export default function PaymentMethodsPage() {
     e.preventDefault();
     try {
       if (editingMethod) {
-        await api.put(`/payment-methods/${editingMethod.id}/`, {
+        await api.put(`payment-methods/${editingMethod.id}/`, {
           name,
           type,
         });
       } else {
-        await api.post("/payment-methods/", { name, type });
+        await api.post("payment-methods/", { name, type });
       }
       handleCloseForm();
       fetchMethods();
@@ -76,7 +76,7 @@ export default function PaymentMethodsPage() {
   const handleDelete = async (id: number) => {
     if (confirm("Deseja excluir este método de pagamento?")) {
       try {
-        await api.delete(`/payment-methods/${id}/`);
+        await api.delete(`payment-methods/${id}/`);
         fetchMethods();
       } catch (err) {
         console.error(err);

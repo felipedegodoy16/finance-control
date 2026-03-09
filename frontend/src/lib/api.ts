@@ -1,11 +1,17 @@
 import axios from "axios";
 
-const baseURL = process.env.NEXT_PUBLIC_API_URL;
+let baseURL = process.env.NEXT_PUBLIC_API_URL || "";
 
-if (!baseURL) {
-  console.warn(
-    "AVISO: NEXT_PUBLIC_API_URL não está definida! O frontend pode não conseguir conectar à API.",
-  );
+if (baseURL) {
+  // Garante que a URL termine com /api/
+  if (!baseURL.endsWith("/api") && !baseURL.endsWith("/api/")) {
+    baseURL = baseURL.endsWith("/") ? `${baseURL}api/` : `${baseURL}/api/`;
+  } else if (baseURL.endsWith("/api")) {
+    baseURL = `${baseURL}/`;
+  }
+} else {
+  console.warn("AVISO: NEXT_PUBLIC_API_URL não está definida!");
+  baseURL = "http://localhost:8000/api/";
 }
 
 console.log("Conectando ao Backend na URL:", baseURL);

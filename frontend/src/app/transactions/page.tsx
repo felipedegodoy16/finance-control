@@ -53,9 +53,9 @@ export default function TransactionsPage() {
   const fetchData = async () => {
     try {
       const [tRes, cRes, mRes] = await Promise.all([
-        api.get("/transactions/"),
-        api.get("/categories/"),
-        api.get("/payment-methods/"),
+        api.get("transactions/"),
+        api.get("categories/"),
+        api.get("payment-methods/"),
       ]);
       setTransactions(tRes.data);
       setCategories(cRes.data);
@@ -98,9 +98,9 @@ export default function TransactionsPage() {
       };
 
       if (editingTransaction) {
-        await api.put(`/transactions/${editingTransaction.id}/`, payload);
+        await api.put(`transactions/${editingTransaction.id}/`, payload);
       } else {
-        await api.post("/transactions/", payload);
+        await api.post("transactions/", payload);
       }
       resetForm();
       fetchData();
@@ -121,7 +121,7 @@ export default function TransactionsPage() {
   const handleDelete = async (id: number) => {
     if (confirm("Excluir transação?")) {
       try {
-        await api.delete(`/transactions/${id}/`);
+        await api.delete(`transactions/${id}/`);
         fetchData();
       } catch (err) {
         console.error(err);

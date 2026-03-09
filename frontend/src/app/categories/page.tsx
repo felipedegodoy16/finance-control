@@ -21,7 +21,7 @@ export default function CategoriesPage() {
 
   const fetchCategories = async () => {
     try {
-      const response = await api.get("/categories/");
+      const response = await api.get("categories/");
       setCategories(response.data);
     } catch (err) {
       console.error(err);
@@ -52,13 +52,13 @@ export default function CategoriesPage() {
     e.preventDefault();
     try {
       if (editingCategory) {
-        await api.put(`/categories/${editingCategory.id}/`, {
+        await api.put(`categories/${editingCategory.id}/`, {
           name,
           color,
           type,
         });
       } else {
-        await api.post("/categories/", { name, color, type });
+        await api.post("categories/", { name, color, type });
       }
       handleCloseForm();
       fetchCategories();
@@ -70,7 +70,7 @@ export default function CategoriesPage() {
   const handleDelete = async (id: number) => {
     if (confirm("Deseja excluir esta categoria?")) {
       try {
-        await api.delete(`/categories/${id}/`);
+        await api.delete(`categories/${id}/`);
         fetchCategories();
       } catch (err) {
         console.error(err);

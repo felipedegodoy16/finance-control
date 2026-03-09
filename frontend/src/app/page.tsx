@@ -43,8 +43,8 @@ export default function Dashboard() {
   const fetchDashboardData = async () => {
     try {
       const [sRes, tRes] = await Promise.all([
-        api.get("/dashboard/summary/"),
-        api.get("/transactions/"),
+        api.get("dashboard/summary/"),
+        api.get("transactions/"),
       ]);
 
       setSummary(sRes.data);
