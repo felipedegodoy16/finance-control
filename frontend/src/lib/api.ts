@@ -1,7 +1,10 @@
 import axios from "axios";
 
+const baseURL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api";
+console.log("Conectando ao Backend na URL:", baseURL);
+
 const api = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api",
+  baseURL: baseURL,
 });
 
 api.interceptors.request.use((config) => {
