@@ -115,14 +115,18 @@ SIMPLE_JWT = {
 }
 
 # CORS & CSRF Settings
-CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+    "https://finance-control-gamma-three.vercel.app",
+]
 
 CSRF_TRUSTED_ORIGINS = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
-    "http://192.168.0.106:3000",
     "https://*.vercel.app",
+    "https://finance-control-gamma-three.vercel.app",
 ]
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
