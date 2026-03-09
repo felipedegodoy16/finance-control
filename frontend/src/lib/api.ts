@@ -1,6 +1,13 @@
 import axios from "axios";
 
-const baseURL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api";
+const baseURL = process.env.NEXT_PUBLIC_API_URL;
+
+if (!baseURL) {
+  console.warn(
+    "AVISO: NEXT_PUBLIC_API_URL não está definida! O frontend pode não conseguir conectar à API.",
+  );
+}
+
 console.log("Conectando ao Backend na URL:", baseURL);
 
 const api = axios.create({
