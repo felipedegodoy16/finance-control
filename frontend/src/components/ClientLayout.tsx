@@ -27,46 +27,51 @@ export function ClientLayout({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex flex-col md:flex-row min-h-screen">
       {!isLoginPage && (
-        <nav className="w-full md:w-20 lg:w-64 bg-vintage-green_dark text-vintage-creme flex flex-row md:flex-col items-center py-4 md:py-8 px-4 gap-8 md:sticky md:top-0 md:h-screen">
-          <div className="hidden md:flex flex-col items-center gap-2 mb-4">
-            <div className="w-12 h-12 bg-white/10 rounded-2xl flex items-center justify-center">
-              <Wallet size={24} />
+        <nav className="w-full md:w-20 lg:w-64 bg-vintage-green_dark text-vintage-creme flex flex-row md:flex-col items-center py-2 md:py-8 px-4 md:px-4 gap-4 md:gap-8 md:sticky md:top-0 md:h-screen z-50">
+          <div className="flex md:flex-col items-center gap-2 md:mb-4">
+            <div className="w-10 h-10 md:w-12 md:h-12 bg-white/10 rounded-xl md:rounded-2xl flex items-center justify-center">
+              <Wallet size={20} className="md:w-6 md:h-6" />
             </div>
-            <span className="text-xs font-black tracking-widest uppercase opacity-50 hidden lg:inline">
+            <span className="text-[10px] md:text-xs font-black tracking-widest uppercase opacity-50 hidden lg:inline">
               Finance
             </span>
           </div>
 
-          <div className="flex flex-row md:flex-col flex-1 justify-around md:justify-start w-full gap-4 md:gap-6">
-            <NavItem href="/" icon={<Home size={24} />} label="Início" />
+          <div className="flex flex-row md:flex-col flex-1 justify-around md:justify-start w-full gap-2 md:gap-6">
+            <NavItem
+              href="/"
+              icon={<Home size={20} className="md:w-6 md:h-6" />}
+              label="Início"
+            />
             <NavItem
               href="/transactions"
-              icon={<DollarSign size={24} />}
+              icon={<DollarSign size={20} className="md:w-6 md:h-6" />}
               label="Transações"
             />
             <NavItem
               href="/categories"
-              icon={<Tag size={24} />}
+              icon={<Tag size={20} className="md:w-6 md:h-6" />}
               label="Categorias"
             />
             <NavItem
               href="/payment-methods"
-              icon={<CreditCard size={24} />}
+              icon={<CreditCard size={20} className="md:w-6 md:h-6" />}
               label="Pagamentos"
             />
           </div>
 
-          <div className="hidden md:flex flex-col gap-4 pt-8 border-t border-white/5 w-full">
-            <div className="bg-white/5 p-4 rounded-2xl hidden lg:block">
-              <p className="text-xs opacity-50">Logado como</p>
-              <p className="text-sm font-bold truncate">Usuário Vintage</p>
+          <div className="flex md:flex-col gap-2 md:gap-4 md:pt-8 md:border-t md:border-white/5 w-auto md:w-full">
+            <div className="bg-white/5 p-3 rounded-xl hidden lg:block">
+              <p className="text-[10px] opacity-50">Logado como</p>
+              <p className="text-xs font-bold truncate">Usuário Vintage</p>
             </div>
             <button
               onClick={handleLogout}
-              className="group flex items-center gap-3 p-3 rounded-2xl hover:bg-red-500/20 text-red-200 transition-all w-full font-bold text-sm"
+              className="group flex items-center justify-center md:justify-start gap-3 p-2.5 md:p-3 rounded-xl md:rounded-2xl hover:bg-red-500/20 text-red-200 transition-all w-10 h-10 md:w-full font-bold text-sm"
+              title="Sair"
             >
               <LogOut size={20} />
-              <span className="hidden lg:inline">Sair</span>
+              <span className="hidden lg:inline text-xs">Sair</span>
             </button>
           </div>
         </nav>

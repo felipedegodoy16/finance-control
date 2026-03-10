@@ -130,51 +130,55 @@ export default function TransactionsPage() {
   };
 
   return (
-    <div className="p-6 md:p-10 max-w-6xl mx-auto space-y-10 min-h-screen">
-      <header className="flex items-center justify-between border-b border-gray-100 pb-8">
-        <div>
-          <h1 className="text-4xl font-black text-vintage-green_dark tracking-tight flex items-center gap-4">
-            <div className="p-3 bg-vintage-creme rounded-2xl shadow-sm text-vintage-green_dark">
-              <DollarSign size={32} />
+    <div className="p-4 md:p-10 max-w-6xl mx-auto space-y-6 md:space-y-10 min-h-screen">
+      <header className="flex flex-col sm:flex-row items-center justify-between border-b border-gray-100 pb-6 md:pb-8 gap-6">
+        <div className="text-center sm:text-left">
+          <h1 className="text-2xl md:text-4xl font-black text-vintage-green_dark tracking-tight flex items-center justify-center sm:justify-start gap-3 md:gap-4">
+            <div className="p-2 md:p-3 bg-vintage-creme rounded-xl md:rounded-2xl shadow-sm text-vintage-green_dark">
+              <DollarSign size={24} className="md:w-8 md:h-8" />
             </div>
             Transações
           </h1>
-          <p className="text-gray-500 font-medium mt-2">
+          <p className="text-xs md:text-sm font-medium text-gray-500 mt-1 md:mt-2">
             Acompanhe sua evolução financeira detalhadamente.
           </p>
         </div>
         {!isAdding && (
           <button
             onClick={() => setIsAdding(true)}
-            className="bg-vintage-green_dark text-white px-6 py-3 rounded-2xl flex items-center gap-2 hover:bg-vintage-green_mid transition-all shadow-xl shadow-green-900/10 font-bold hover:scale-105"
+            className="w-full sm:w-auto bg-vintage-green_dark text-white px-5 py-3 rounded-xl md:rounded-2xl flex items-center justify-center gap-2 hover:bg-vintage-green_mid transition-all shadow-xl shadow-green-900/10 font-bold hover:scale-105 text-sm md:text-base"
           >
-            <Plus size={22} /> Nova Transação
+            <Plus size={20} /> Nova Transação
           </button>
         )}
       </header>
 
       {isAdding && (
-        <div className="bg-white p-10 rounded-4xl border border-gray-100 shadow-2xl animate-in slide-in-from-top duration-700">
-          <div className="flex items-center justify-between mb-8">
-            <h2 className="text-2xl font-black text-vintage-green_dark flex items-center gap-3">
-              {editingTransaction ? <Edit3 size={32} /> : <Plus size={32} />}
+        <div className="bg-white p-6 md:p-10 rounded-[1.5rem] md:rounded-4xl border border-gray-100 shadow-2xl animate-in slide-in-from-top duration-700">
+          <div className="flex items-center justify-between mb-6 md:mb-8">
+            <h2 className="text-xl md:text-2xl font-black text-vintage-green_dark flex items-center gap-3">
+              {editingTransaction ? (
+                <Edit3 size={24} className="md:w-8 md:h-8" />
+              ) : (
+                <Plus size={24} className="md:w-8 md:h-8" />
+              )}
               {editingTransaction ? "Editar Lançamento" : "Nova Transação"}
             </h2>
             <button
               onClick={resetForm}
-              className="text-gray-400 hover:text-gray-600"
+              className="text-gray-400 hover:text-gray-600 p-1"
             >
-              <X size={32} />
+              <X size={24} className="md:w-8 md:h-8" />
             </button>
           </div>
-          <form onSubmit={handleSubmit} className="space-y-8">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <form onSubmit={handleSubmit} className="space-y-6 md:space-y-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
               <div className="space-y-2">
-                <label className="text-sm font-black text-gray-700 uppercase tracking-wider">
+                <label className="text-xs font-black text-gray-700 uppercase tracking-wider">
                   Valor
                 </label>
                 <div className="relative">
-                  <span className="absolute left-5 top-1/2 -translate-y-1/2 text-vintage-green_mid font-black text-xl">
+                  <span className="absolute left-4 top-1/2 -translate-y-1/2 text-vintage-green_mid font-black text-lg md:text-xl">
                     R$
                   </span>
                   <input
@@ -182,40 +186,40 @@ export default function TransactionsPage() {
                     step="0.01"
                     value={amount}
                     onChange={(e) => setAmount(e.target.value)}
-                    className="w-full pl-14 pr-5 py-4 rounded-2xl border border-gray-200 focus:ring-4 focus:ring-vintage-green_mid/10 outline-none text-2xl font-black text-gray-800 h-16"
+                    className="w-full pl-12 pr-4 py-3 md:py-4 rounded-xl md:rounded-2xl border border-gray-200 focus:ring-4 focus:ring-vintage-green_mid/10 outline-none text-xl md:text-2xl font-black text-gray-800 h-14 md:h-16"
                     placeholder="0,00"
                     required
                   />
                 </div>
               </div>
               <div className="space-y-2">
-                <label className="text-sm font-black text-gray-700 uppercase tracking-wider">
+                <label className="text-xs font-black text-gray-700 uppercase tracking-wider">
                   Data
                 </label>
                 <input
                   type="date"
                   value={date}
                   onChange={(e) => setDate(e.target.value)}
-                  className="w-full px-5 py-4 rounded-2xl border border-gray-200 focus:ring-4 focus:ring-vintage-green_mid/10 outline-none font-bold text-gray-700 h-16"
+                  className="w-full px-4 py-3 md:py-4 rounded-xl md:rounded-2xl border border-gray-200 focus:ring-4 focus:ring-vintage-green_mid/10 outline-none font-bold text-gray-700 h-14 md:h-16 text-sm"
                   required
                 />
               </div>
               <div className="space-y-2">
-                <label className="text-sm font-black text-gray-700 uppercase tracking-wider">
+                <label className="text-xs font-black text-gray-700 uppercase tracking-wider">
                   Tipo de Fluxo
                 </label>
-                <div className="flex bg-gray-50 p-1.5 rounded-2xl h-16">
+                <div className="flex bg-gray-50 p-1.5 rounded-xl md:rounded-2xl h-14 md:h-16">
                   <button
                     type="button"
                     onClick={() => setType("EXPENSE")}
-                    className={`flex-1 rounded-xl text-sm font-black transition-all ${type === "EXPENSE" ? "bg-white text-red-600 shadow-md" : "text-gray-400 hover:text-gray-600"}`}
+                    className={`flex-1 rounded-lg md:rounded-xl text-xs font-black transition-all ${type === "EXPENSE" ? "bg-white text-red-600 shadow-md" : "text-gray-400 hover:text-gray-600"}`}
                   >
                     Despesa
                   </button>
                   <button
                     type="button"
                     onClick={() => setType("INCOME")}
-                    className={`flex-1 rounded-xl text-sm font-black transition-all ${type === "INCOME" ? "bg-white text-green-700 shadow-md" : "text-gray-400 hover:text-gray-600"}`}
+                    className={`flex-1 rounded-lg md:rounded-xl text-xs font-black transition-all ${type === "INCOME" ? "bg-white text-green-700 shadow-md" : "text-gray-400 hover:text-gray-600"}`}
                   >
                     Receita
                   </button>
@@ -223,15 +227,15 @@ export default function TransactionsPage() {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
               <div className="space-y-2">
-                <label className="text-sm font-black text-gray-700 uppercase tracking-wider">
+                <label className="text-xs font-black text-gray-700 uppercase tracking-wider">
                   Categoria
                 </label>
                 <select
                   value={categoryId}
                   onChange={(e) => setCategoryId(e.target.value)}
-                  className="w-full px-5 py-4 rounded-2xl border border-gray-200 focus:ring-4 focus:ring-vintage-green_mid/10 outline-none bg-white font-bold text-gray-700 h-16"
+                  className="w-full px-4 py-3 md:py-4 rounded-xl md:rounded-2xl border border-gray-200 focus:ring-4 focus:ring-vintage-green_mid/10 outline-none bg-white font-bold text-gray-700 h-14 md:h-16 text-sm"
                   required
                 >
                   <option value="">Selecione uma categoria...</option>
@@ -245,13 +249,13 @@ export default function TransactionsPage() {
                 </select>
               </div>
               <div className="space-y-2">
-                <label className="text-sm font-black text-gray-700 uppercase tracking-wider">
+                <label className="text-xs font-black text-gray-700 uppercase tracking-wider">
                   Meio de Pagamento
                 </label>
                 <select
                   value={methodId}
                   onChange={(e) => setMethodId(e.target.value)}
-                  className="w-full px-5 py-4 rounded-2xl border border-gray-200 focus:ring-4 focus:ring-vintage-green_mid/10 outline-none bg-white font-bold text-gray-700 h-16"
+                  className="w-full px-4 py-3 md:py-4 rounded-xl md:rounded-2xl border border-gray-200 focus:ring-4 focus:ring-vintage-green_mid/10 outline-none bg-white font-bold text-gray-700 h-14 md:h-16 text-sm"
                   required
                 >
                   <option value="">Onde foi pago/recebido?</option>
@@ -265,31 +269,29 @@ export default function TransactionsPage() {
             </div>
 
             <div className="space-y-2">
-              <label className="text-sm font-black text-gray-700 uppercase tracking-wider">
+              <label className="text-xs font-black text-gray-700 uppercase tracking-wider">
                 Descrição ou Observações
               </label>
               <textarea
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
-                className="w-full px-5 py-4 rounded-2xl border border-gray-200 focus:ring-4 focus:ring-vintage-green_mid/10 outline-none h-28 font-medium text-gray-700"
+                className="w-full px-4 py-3 md:py-4 rounded-xl md:rounded-2xl border border-gray-200 focus:ring-4 focus:ring-vintage-green_mid/10 outline-none h-24 md:h-28 font-medium text-gray-700 text-sm"
                 placeholder="Ex: Aluguel do mês, Supermercado..."
               />
             </div>
 
-            <div className="flex gap-4 pt-6">
+            <div className="flex flex-col sm:flex-row gap-3 md:gap-4 pt-4 md:pt-6">
               <button
                 type="submit"
-                className="flex-2 bg-vintage-green_dark text-white font-black py-5 rounded-4xl hover:bg-vintage-green_mid transition-all shadow-2xl shadow-green-900/20 text-lg flex items-center justify-center gap-3 active:scale-95"
+                className="flex-1 bg-vintage-green_dark text-white font-black py-4 md:py-5 rounded-xl md:rounded-4xl hover:bg-vintage-green_mid transition-all shadow-xl shadow-green-900/10 text-base md:text-lg flex items-center justify-center gap-2 active:scale-95 order-1 sm:order-2"
               >
-                <Check size={24} />{" "}
-                {editingTransaction
-                  ? "Salvar Alterações"
-                  : "Confirmar Lançamento"}
+                <Check size={20} className="md:w-6 md:h-6" />{" "}
+                {editingTransaction ? "Salvar" : "Confirmar"}
               </button>
               <button
                 type="button"
                 onClick={resetForm}
-                className="flex-1 bg-gray-100 text-gray-500 font-black py-5 rounded-4xl hover:bg-gray-200 transition-all text-lg"
+                className="flex-1 bg-gray-100 text-gray-500 font-black py-4 md:py-5 rounded-xl md:rounded-4xl hover:bg-gray-200 transition-all text-base md:text-lg order-2 sm:order-1"
               >
                 Cancelar
               </button>
@@ -303,47 +305,44 @@ export default function TransactionsPage() {
           ? transactions.map((t) => (
               <div
                 key={t.id}
-                className="bg-white p-7 rounded-4xl shadow-sm border border-gray-100 flex items-center justify-between hover:shadow-md transition-all group"
+                className="bg-white p-4 md:p-7 rounded-[1.5rem] md:rounded-4xl shadow-sm border border-gray-100 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 hover:shadow-md transition-all group"
               >
-                <div className="flex items-center gap-6">
+                <div className="flex items-center gap-4 md:gap-6 w-full sm:w-auto">
                   <div
-                    className={`p-5 rounded-2xl ${t.type === "INCOME" ? "bg-green-50 text-green-600 shadow-sm shadow-green-900/5" : "bg-red-50 text-red-600 shadow-sm shadow-red-900/5"}`}
+                    className={`p-3 md:p-5 rounded-xl md:rounded-2xl ${t.type === "INCOME" ? "bg-green-50 text-green-600 shadow-sm shadow-green-900/5" : "bg-red-50 text-red-600 shadow-sm shadow-red-900/5"}`}
                   >
                     {t.type === "INCOME" ? (
-                      <ArrowDownLeft size={28} />
+                      <ArrowDownLeft size={20} className="md:w-7 md:h-7" />
                     ) : (
-                      <ArrowUpRight size={28} />
+                      <ArrowUpRight size={20} className="md:w-7 md:h-7" />
                     )}
                   </div>
-                  <div>
-                    <h3 className="font-black text-xl text-gray-800">
+                  <div className="flex-1">
+                    <h3 className="font-black text-base md:text-xl text-gray-800">
                       {t.description || t.category_name}
                     </h3>
-                    <div className="flex items-center gap-4 text-sm font-bold text-gray-400 mt-1">
-                      <span className="flex items-center gap-1.5 bg-gray-50 px-2.5 py-1 rounded-lg">
+                    <div className="flex flex-wrap items-center gap-2 md:gap-4 text-[10px] md:text-sm font-bold text-gray-400 mt-1">
+                      <span className="flex items-center gap-1 bg-gray-50 px-2 py-0.5 md:px-2.5 md:py-1 rounded-lg">
                         <Calendar
-                          size={14}
-                          className="text-vintage-green_mid"
+                          size={12}
+                          className="text-vintage-green_mid md:w-3.5 md:h-3.5"
                         />{" "}
                         {t.date}
                       </span>
-                      <span className="flex items-center gap-1.5 bg-gray-50 px-2.5 py-1 rounded-lg">
+                      <span className="flex items-center gap-1 bg-gray-50 px-2 py-0.5 md:px-2.5 md:py-1 rounded-lg">
                         <FileText
-                          size={14}
-                          className="text-vintage-green_mid"
+                          size={12}
+                          className="text-vintage-green_mid md:w-3.5 md:h-3.5"
                         />{" "}
                         {t.payment_method_name}
-                      </span>
-                      <span className="px-2 py-0.5 rounded-md bg-vintage-creme text-vintage-green_dark text-[10px] font-black uppercase tracking-widest">
-                        {t.type === "INCOME" ? "Receita" : "Despesa"}
                       </span>
                     </div>
                   </div>
                 </div>
-                <div className="flex items-center gap-8">
+                <div className="flex items-center justify-between sm:justify-end gap-4 md:gap-8 w-full sm:w-auto mt-2 sm:mt-0 pt-4 sm:pt-0 border-t sm:border-t-0 border-gray-50">
                   <div className="text-right">
                     <p
-                      className={`text-2xl font-black ${t.type === "INCOME" ? "text-green-700" : "text-red-600"}`}
+                      className={`text-lg md:text-2xl font-black ${t.type === "INCOME" ? "text-green-700" : "text-red-600"}`}
                     >
                       {t.type === "INCOME" ? "+" : "-"} R${" "}
                       {parseFloat(t.amount).toLocaleString("pt-BR", {
@@ -351,18 +350,18 @@ export default function TransactionsPage() {
                       })}
                     </p>
                   </div>
-                  <div className="flex gap-2">
+                  <div className="flex gap-1 md:gap-2">
                     <button
                       onClick={() => handleOpenEdit(t)}
-                      className="p-3 hover:bg-gray-100 rounded-xl text-gray-300 hover:text-vintage-green_mid transition-colors"
+                      className="p-2 md:p-3 hover:bg-gray-100 rounded-lg md:rounded-xl text-gray-300 hover:text-vintage-green_mid transition-colors"
                     >
-                      <Edit3 size={20} />
+                      <Edit3 size={18} className="md:w-5 md:h-5" />
                     </button>
                     <button
                       onClick={() => handleDelete(t.id)}
-                      className="p-3 hover:bg-red-50 rounded-xl text-gray-300 hover:text-red-500 transition-colors"
+                      className="p-2 md:p-3 hover:bg-red-50 rounded-lg md:rounded-xl text-gray-300 hover:text-red-500 transition-colors"
                     >
-                      <Trash2 size={20} />
+                      <Trash2 size={18} className="md:w-5 md:h-5" />
                     </button>
                   </div>
                 </div>
