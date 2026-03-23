@@ -11,10 +11,26 @@ import {
   Wallet,
   LogOut,
 } from "lucide-react";
+import api from "@/lib/api";
 
 export function ClientLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-  const isLoginPage = pathname === "/login";
+  const [user, setUser] = React.useState<{ username: string } | null>(null);
+  const isPublicPage = pathname === "/login" || pathname === "/register";
+
+  React.useEffect(() => {
+    if (!isPublicPage) {
+      const fetchUser = async () => {
+        try {
+          const response = await api.get("users/me/");
+          setUser(response.data);
+        } catch (error) {
+          console.error("Error fetching user:", error);
+        }
+      };
+      fetchUser();
+    }
+  }, [isPublicPage]);
 
   const handleLogout = () => {
     localStorage.removeItem("access_token");
@@ -26,7 +42,7 @@ export function ClientLayout({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="flex flex-col md:flex-row min-h-screen">
-      {!isLoginPage && (
+      {!isPublicPage && (
         <nav className="w-full md:w-20 lg:w-64 bg-vintage-green_dark text-vintage-creme flex flex-row md:flex-col items-center py-2 md:py-8 px-4 md:px-4 gap-4 md:gap-8 md:sticky md:top-0 md:h-screen z-50">
           <div className="flex md:flex-col items-center gap-2 md:mb-4">
             <div className="w-10 h-10 md:w-12 md:h-12 bg-white/10 rounded-xl md:rounded-2xl flex items-center justify-center">
@@ -63,7 +79,7 @@ export function ClientLayout({ children }: { children: React.ReactNode }) {
           <div className="flex md:flex-col gap-2 md:gap-4 md:pt-8 md:border-t md:border-white/5 w-auto md:w-full">
             <div className="bg-white/5 p-3 rounded-xl hidden lg:block">
               <p className="text-[10px] opacity-50">Logado como</p>
-              <p className="text-xs font-bold truncate">Usuário Vintage</p>
+              <p className="text-xs font-bold truncate">{user ? user.username : "Carregando..."}</p>
             </div>
             <button
               onClick={handleLogout}

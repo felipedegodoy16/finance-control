@@ -1,19 +1,30 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, Suspense } from "react";
 import api from "@/lib/api";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { Wallet, LogIn } from "lucide-react";
+import Link from "next/link";
 
-export default function LoginPage() {
+function LoginContent() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
   const router = useRouter();
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    const registered = searchParams.get("registered");
+    if (registered && !success) {
+      setSuccess("Cadastro realizado com sucesso! Faça login para continuar.");
+    }
+  }, [searchParams, success]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
+    setSuccess("");
     try {
       const response = await api.post("token/", { username, password });
       localStorage.setItem("access_token", response.data.access);
@@ -30,7 +41,7 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-vintage-creme flex items-center justify-center p-6 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px]">
+    <div className="min-h-screen bg-vintage-creme flex items-center justify-center p-6 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] bg-size-[16px_16px]">
       <div className="max-w-md w-full bg-white rounded-[3rem] shadow-2xl overflow-hidden border border-gray-100 animate-in fade-in zoom-in duration-700">
         <div className="bg-vintage-green_dark p-12 text-center text-white relative overflow-hidden">
           <div className="relative z-10">
@@ -49,6 +60,12 @@ export default function LoginPage() {
           {error && (
             <div className="p-4 bg-red-50 border border-red-100 text-red-600 rounded-2xl text-sm font-bold text-center animate-shake">
               {error}
+            </div>
+          )}
+
+          {success && (
+            <div className="p-4 bg-green-50 border border-green-100 text-green-600 rounded-2xl text-sm font-bold text-center">
+              {success}
             </div>
           )}
 
@@ -91,6 +108,15 @@ export default function LoginPage() {
             Entrar no Sistema
           </button>
 
+          <div className="text-center">
+            <p className="text-gray-500 font-medium">
+              Novo por aqui?{" "}
+              <Link href="/register" className="text-vintage-green_dark font-black hover:underline">
+                Cadastre-se
+              </Link>
+            </p>
+          </div>
+
           <footer className="pt-4 text-center">
             <p className="text-xs font-bold text-gray-300 uppercase tracking-widest">
               Premium Financial Experience
@@ -99,5 +125,17 @@ export default function LoginPage() {
         </form>
       </div>
     </div>
+  );
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-vintage-creme flex items-center justify-center">
+        <div className="animate-pulse text-vintage-green_dark font-black">Carregando...</div>
+      </div>
+    }>
+      <LoginContent />
+    </Suspense>
   );
 }

@@ -23,6 +23,7 @@ export default function RootLayout({
     <html lang="pt-br">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-vintage-creme min-h-screen`}
+        suppressHydrationWarning
       >
         <ClientLayout>{children}</ClientLayout>
       </body>
