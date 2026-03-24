@@ -60,8 +60,9 @@ export default function TransactionsPage() {
       setTransactions(tRes.data);
       setCategories(cRes.data);
       setMethods(mRes.data);
-    } catch (err) {
+    } catch (err: any) {
       console.error(err);
+      alert("Erro ao carregar dados: " + (err.response?.data?.detail || err.message));
     }
   };
 
