@@ -1,0 +1,7 @@
+{
+  "name": "finance-api-backend",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "python vercel_build.py"
+  }
+}
