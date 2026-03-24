@@ -62,8 +62,9 @@ export default function CategoriesPage() {
       }
       handleCloseForm();
       fetchCategories();
-    } catch (err) {
+    } catch (err: any) {
       console.error(err);
+      alert("Erro ao processar categoria: " + (JSON.stringify(err.response?.data) || err.message));
     }
   };
 
@@ -72,8 +73,9 @@ export default function CategoriesPage() {
       try {
         await api.delete(`categories/${id}/`);
         fetchCategories();
-      } catch (err) {
+      } catch (err: any) {
         console.error(err);
+        alert("Erro ao excluir categoria: " + (JSON.stringify(err.response?.data) || err.message));
       }
     }
   };

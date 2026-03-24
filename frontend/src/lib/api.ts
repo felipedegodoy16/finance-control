@@ -32,16 +32,29 @@ api.interceptors.request.use((config) => {
 api.interceptors.response.use(
   (response) => response,
   (error) => {
-    if (
+    console.group("Erro na API");
+    console.error("URL:", error.config?.url);
+    console.error("Método:", error.config?.method);
+    console.error("Status:", error.response?.status);
+    console.error("Dados:", error.response?.data);
+    console.groupEnd();
+
+    const isPublicPage =
       typeof window !== "undefined" &&
-      !window.location.pathname.includes("/login")
+      (window.location.pathname.includes("/login") ||
+        window.location.pathname.includes("/register"));
+
+    if (
+      error.response?.status === 401 &&
+      typeof window !== "undefined" &&
+      !isPublicPage
     ) {
+      console.warn("Retornando 401. Deslogando...");
       localStorage.removeItem("access_token");
       localStorage.removeItem("refresh_token");
-      // Clear cookie for middleware
       document.cookie =
         "access_token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";
-      window.location.href = "/login";
+      window.location.href = "/login?error=session_expired";
     }
     return Promise.reject(error);
   },

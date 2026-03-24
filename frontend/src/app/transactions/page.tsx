@@ -104,8 +104,9 @@ export default function TransactionsPage() {
       }
       resetForm();
       fetchData();
-    } catch (err) {
+    } catch (err: any) {
       console.error(err);
+      alert("Erro ao processar transação: " + (JSON.stringify(err.response?.data) || err.message));
     }
   };
 
@@ -123,8 +124,9 @@ export default function TransactionsPage() {
       try {
         await api.delete(`transactions/${id}/`);
         fetchData();
-      } catch (err) {
+      } catch (err: any) {
         console.error(err);
+        alert("Erro ao excluir transação: " + (JSON.stringify(err.response?.data) || err.message));
       }
     }
   };
