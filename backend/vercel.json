@@ -3,14 +3,13 @@
   "builds": [
     {
       "src": "finance_api/wsgi.py",
-      "use": "@vercel/python",
-      "config": { "maxLambdaSize": "15mb", "runtime": "python3.9" }
+      "use": "@vercel/python"
     }
   ],
-  "routes": [
+  "rewrites": [
     {
-      "src": "/(.*)",
-      "dest": "finance_api/wsgi.py"
+      "source": "/(.*)",
+      "destination": "finance_api/wsgi.py"
     }
   ]
 }
