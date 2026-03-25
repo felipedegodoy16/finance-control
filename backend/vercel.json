@@ -6,10 +6,10 @@
       "use": "@vercel/python"
     }
   ],
-  "rewrites": [
+  "routes": [
     {
-      "source": "/(.*)",
-      "destination": "finance_api/wsgi.py"
+      "src": "/(.*)",
+      "dest": "finance_api/wsgi.py"
     }
   ]
 }
